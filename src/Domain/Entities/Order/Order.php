@@ -1,34 +1,35 @@
 <?php
 
-namespace Jhonattan\BaseProjectFromEcommerce\Domain\Entities;
+namespace Jhonattan\BaseProjectFromEcommerce\Domain\Entities\Order;
 
-use Jhonattan\BaseProjectFromEcommerce\Domain\Entities\Customer;
-use Jhonattan\BaseProjectFromEcommerce\Domain\Entities\Delivery;
-use Jhonattan\BaseProjectFromEcommerce\Domain\Entities\OrderItem;
-use Jhonattan\BaseProjectFromEcommerce\Domain\Entities\Enums\OrderStatus;
 use DomainException;
+use Jhonattan\BaseProjectFromEcommerce\Domain\Entities\User;
+use Jhonattan\BaseProjectFromEcommerce\Domain\Entities\Order\Delivery;
+use Jhonattan\BaseProjectFromEcommerce\Domain\Entities\Order\OrderItem;
+use Jhonattan\BaseProjectFromEcommerce\Domain\Entities\Order\OrderPayment;
+use Jhonattan\BaseProjectFromEcommerce\Domain\Entities\Enums\OrderStatus;
 use Jhonattan\BaseProjectFromEcommerce\Domain\Entities\Enums\PaymentStatus;
 use Jhonattan\BaseProjectFromEcommerce\Domain\Exceptions\InvalidOrderStatusTransitionException as OrderStatusException;
-use Jhonattan\BaseProjectFromEcommerce\Domain\Exceptions\InvalidPaymentStatusTransitionException as PaymentStatusException;
 
 class Order
 {
     private string $id;
 
     private array $orderItems;
-    private Payment $payment;
-    private Customer $customer;
-    private OrderStatus $status;
-    private PaymentStatus $paymentStatus;
-    private float $total;
+    private OrderPayment $payment;
+    private User $customer;
     private Delivery $delivery;
+    private OrderStatus $status;
+    private float $total;
 
     public function __construct(
         string $id,
         array $orderItems,
-        Payment $payment,
-        Customer $customer,
-        Delivery $delivery
+        OrderPayment $payment,
+        User $customer,
+        Delivery $delivery,
+        OrderStatus $status
+
     ) {
         $this->validateId($id);
         $this->id = $id;
@@ -37,6 +38,7 @@ class Order
         $this->payment = $payment;
         $this->customer = $customer;
         $this->delivery = $delivery;
+        $this->status = $status;
         $this->total = $this->calculateTotal();
     }
     private function calculateTotal(): float
@@ -87,7 +89,7 @@ class Order
             throw new OrderStatusException('Cannot change status of a Refused order');
         }
 
-        if ($this->paymentStatus !== PaymentStatus::PAID) {
+        if ($this->payment->getStatus() !== PaymentStatus::PAID) {
             throw new OrderStatusException('Cannot change order status before payment is made');
         }
 
@@ -104,18 +106,9 @@ class Order
             );
         }
     }
-    public function changePaymentStatus(PaymentStatus $newStatus): void
-    {
-        if ($this->paymentStatus === $newStatus) {
-            throw new PaymentStatusException('Payment status cannot be changed to the same status');
-        }
-        if ($this->paymentStatus === PaymentStatus::CANCELLED) {
-            throw new PaymentStatusException('Cannot change payment status of a cancelled order');
-        }
 
-        if ($this->paymentStatus === PaymentStatus::PAID) {
-            throw new PaymentStatusException('Cannot change payment status of a paid order');
-        }
-        $this->paymentStatus = $newStatus;
+    public function addOrderItem(OrderItem $item): void
+    {
+        array_push($this->orderItems, $item);
     }
 }

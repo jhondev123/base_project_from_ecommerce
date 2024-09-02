@@ -1,6 +1,9 @@
 <?php
 
-namespace Jhonattan\BaseProjectFromEcommerce\Domain\Entities;
+namespace Jhonattan\BaseProjectFromEcommerce\Domain\Entities\Order;
+
+use Jhonattan\BaseProjectFromEcommerce\Domain\Entities\Product;
+use Jhonattan\BaseProjectFromEcommerce\Domain\Entities\Toppings;
 
 class OrderItem
 {

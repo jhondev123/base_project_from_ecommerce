@@ -1,6 +1,6 @@
 <?php
 
-namespace Jhonattan\BaseProjectFromEcommerce\Domain\Entities;
+namespace Jhonattan\BaseProjectFromEcommerce\Domain\Entities\Order;
 
 use Jhonattan\BaseProjectFromEcommerce\Domain\ValueObjects\Address;
 

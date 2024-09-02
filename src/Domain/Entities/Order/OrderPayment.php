@@ -9,10 +9,6 @@ use Jhonattan\BaseProjectFromEcommerce\Domain\Exceptions\InvalidPaymentStatusTra
 class OrderPayment
 {
     public function __construct(private string $id, private PaymentMethod $method, private PaymentStatus $status) {}
-    public function getId(): string
-    {
-        return $this->id;
-    }
     public function getMethod(): PaymentMethod
     {
         return $this->method;

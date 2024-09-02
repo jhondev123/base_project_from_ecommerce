@@ -1,0 +1,25 @@
+{
+    "name": "jhonattan/base_project_from_ecommerce",
+    "autoload": {
+        "psr-4": {
+            "Jhonattan\\BaseProjectFromEcommerce\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Jhonattan\\BaseProjectFromEcommerce\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "jhondev123",
+            "email": "jhonattan.curtarelli@outlook.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^11.3"
+    },
+    "require": {
+        "spryker/ramsey-uuid": "^2.0"
+    }
+}

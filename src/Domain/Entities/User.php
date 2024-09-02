@@ -10,7 +10,7 @@ class User
 {
     private string $id;
     private string $name;
-    private array $address;
+    private array $address = [];
     private Email $email;
     private Phone $phoneNumber;
     private bool $isAdmin;
@@ -57,6 +57,10 @@ class User
     public function isAdmin(): bool
     {
         return $this->isAdmin;
+    }
+    public function getPassword(): string
+    {
+        return $this->password;
     }
     public function addAddress(Address $address): void
     {

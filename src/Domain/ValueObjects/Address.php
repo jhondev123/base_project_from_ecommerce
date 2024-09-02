@@ -22,7 +22,7 @@ class Address
         string $complement,
         string $zipCode
     ) {
-        $this->validateZipCode($zipCode);
+        self::validateZipCode($zipCode);
         $this->street = $street;
         $this->city = $city;
         $this->state = $state;
@@ -32,10 +32,43 @@ class Address
         $this->complement = $complement;
         $this->zipCode = $zipCode;
     }
-    public function validateZipCode(string $zipCode): void
+    public static function validateZipCode(string $zipCode): void
     {
         if (!preg_match("/^[0-9]{5}-?[0-9]{3}$/", $zipCode)) {
             throw new \InvalidArgumentException("Invalid zip code format.");
         }
+    }
+    // getters
+    public function getStreet(): string
+    {
+        return $this->street;
+    }
+    public function getCity(): string
+    {
+        return $this->city;
+    }
+    public function getState(): string
+    {
+        return $this->state;
+    }
+    public function getCountry(): string
+    {
+        return $this->country;
+    }
+    public function getDistrict(): string
+    {
+        return $this->district;
+    }
+    public function getNumber(): int
+    {
+        return $this->number;
+    }
+    public function getComplement(): string
+    {
+        return $this->complement;
+    }
+    public function getZipCode(): string
+    {
+        return $this->zipCode;
     }
 }

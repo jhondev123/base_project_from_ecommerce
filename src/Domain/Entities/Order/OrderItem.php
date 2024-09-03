@@ -55,9 +55,10 @@ class OrderItem
             throw new \DomainException('Quantity must be greater than 0');
         }
     }
-    public function addTopping(Topping $topping): void
+    public function addTopping(Topping $topping): self
     {
         array_push($this->toppings, $topping);
+        return $this;
     }
     public function getToppings(): array
     {

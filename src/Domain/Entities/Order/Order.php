@@ -111,4 +111,12 @@ class Order
     {
         array_push($this->orderItems, $item);
     }
+    public function getStatus(): OrderStatus
+    {
+        return $this->status;
+    }
+    public function getTotal(): float
+    {
+        return $this->total;
+    }
 }

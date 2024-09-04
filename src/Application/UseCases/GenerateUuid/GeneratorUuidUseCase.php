@@ -1,10 +1,10 @@
 <?php
 
-namespace Jhonattan\BaseProjectFromEcommerce\Application\Factories\UseCases\GenerateUiid;
+namespace Jhonattan\BaseProjectFromEcommerce\Application\UseCases\GenerateUuid;
 
 use Jhonattan\BaseProjectFromEcommerce\Domain\Interfaces\UuidGenerator;
 
-class GeneratorUiidUseCase
+class GeneratorUuidUseCase
 {
     public function __construct(private UuidGenerator $uuidGenerator) {}
     public function execute(): string

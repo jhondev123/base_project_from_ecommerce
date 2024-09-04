@@ -1,6 +1,6 @@
 <?php
 
-namespace Jhonattan\BaseProjectFromEcommerce\Application\Factories\UseCases\User\RegisterUser;
+namespace Jhonattan\BaseProjectFromEcommerce\Application\UseCases\User\RegisterUser;
 
 use Jhonattan\BaseProjectFromEcommerce\Domain\Entities\User;
 use Jhonattan\BaseProjectFromEcommerce\Domain\ValueObjects\Email;
@@ -8,19 +8,21 @@ use Jhonattan\BaseProjectFromEcommerce\Domain\ValueObjects\Phone;
 
 class RegisterUserDTO
 {
+    private string $id;
+   
+
     public function __construct(
-        public string $id,
         public string $name,
         public array $address = [],
         public string $email,
         public string $phoneNumber,
         public bool $isAdmin,
-        public string $password,
-
+        public string $password
 
     ) {}
     public function toEntity()
     {
+
         return new User(
             $this->id,
             $this->name,
@@ -31,4 +33,15 @@ class RegisterUserDTO
             $this->password,
         );
     }
+    public function setId(string $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+        return $this;
+    }
+  
 }

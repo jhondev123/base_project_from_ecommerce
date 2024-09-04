@@ -110,6 +110,7 @@ class Order
     public function addOrderItem(OrderItem $item): void
     {
         array_push($this->orderItems, $item);
+        $this->total = $this->calculateTotal();
     }
     public function getStatus(): OrderStatus
     {
